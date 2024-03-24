@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {User} from '../src/user/entities/user.entity'
+import { Form } from 'src/form/entities/form.entity';
 
 
 @Module({
@@ -11,12 +12,11 @@ import {User} from '../src/user/entities/user.entity'
           port: 5432,
           password: 'infernus',
           username: 'postgres',
-          entities: [User],
+          entities: [User,Form],
           database: 'SignUp_DB',
           synchronize: false,
-          logging: true,
         }),
-        TypeOrmModule.forFeature([User]),
+        TypeOrmModule.forFeature([User,Form]),
       ],
       exports: [TypeOrmModule],
 })
