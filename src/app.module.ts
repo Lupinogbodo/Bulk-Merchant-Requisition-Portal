@@ -4,11 +4,13 @@ import { UserService } from './user/user.service';
 import {DatabaseModule} from '../database/database.module'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoginApiModule } from './login-api/login-api.module';
+import { FormModule } from './form/form.module';
 
 @Module({
   imports:[
             DatabaseModule,
-            LoginApiModule
+            LoginApiModule,
+            FormModule
           ],
   controllers: [UserController],
   providers: [UserService],

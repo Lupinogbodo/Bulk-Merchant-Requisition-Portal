@@ -16,13 +16,13 @@ export class User {
   @Column()
   password: string;
 
-  //   async setPassword(rawPassword: string) {
-  //   this.password = await bcrypt.hash(rawPassword, 10); // Hash the password with a salt factor of 10
-  // }
+    async setPassword(rawPassword: string) {
+    this.password = await bcrypt.hash(rawPassword, 10); 
+  }
 
-  // async comparePassword(rawPassword: string) {
-  //   return await bcrypt.compare(rawPassword, this.password); // Compare raw password with hashed password
-  // }
+  async comparePassword(rawPassword: string) {
+    return await bcrypt.compare(rawPassword, this.password); 
+  }
 
   @Column({
     type: 'enum',
