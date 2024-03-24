@@ -12,14 +12,25 @@ export class LoginService {
     private readonly userRepository: Repository<User>,
   ) { }
 
+  // async findByUsernameAndPassword(username: string, password: string): Promise<User | null> {
+  //   const user = await this.userRepository.findOne({ where: { username } });
+  //   if (!user) {
+  //     throw new UnauthorizedException('Invalid username');
+  //   }
+  //   if (compare(user.password, password)) {
+  //     return user;
+  //   }
+  //   throw new UnauthorizedException('Invalid username password combination.');
+  // }
   async findByUsernameAndPassword(username: string, password: string): Promise<User | null> {
     const user = await this.userRepository.findOne({ where: { username } });
     if (!user) {
       throw new UnauthorizedException('Invalid username');
     }
-    if (compare(user.password, password)) {
-      return user;
+    const isPasswordMatching = await compare(password, user.password);
+    if (!isPasswordMatching) {
+      throw new UnauthorizedException('Invalid password');
     }
-    throw new UnauthorizedException('Invalid username password combination.');
-  }
+    return user;
+  }
 }

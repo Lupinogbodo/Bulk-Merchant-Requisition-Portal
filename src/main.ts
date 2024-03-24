@@ -1,10 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { sessionConfig } from 'session/session.config';
+import pg from 'pg';
+import pgSession from 'connect-pg-simple';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const pgPool = new pg.Pool({
+    connectionString: 'postgresql://postgres:infernus@localhost:5432/SignUp_DB', });
   app.enableCors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'DELETE'],

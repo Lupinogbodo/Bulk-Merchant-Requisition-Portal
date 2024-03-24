@@ -1,17 +1,15 @@
 import { Controller, Post, Body, ConflictException, Get, Param, Delete, NotFoundException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
-import { JobPosition } from './entities/user.entity';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import {  ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
-  @ApiTags('user')
+  @ApiTags('sign-up')
   async signUp(@Body() user: CreateUserDto): Promise<User> {
     const existingUser = await this.userService.findByEmail(user.email);
     if (existingUser) {
@@ -21,18 +19,18 @@ export class UserController {
   }
 
   @Get()
-  @ApiTags('user')
+  @ApiTags('sign-up')
   async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @Get('email/:email')
-  @ApiTags('user')
+  @ApiTags('sign-up')
   async findByEmail(@Param('email') email: string): Promise<User> {
     return this.userService.findByEmail(email);
   }
   @Delete(':id')
-  @ApiTags('user')
+  @ApiTags('sign-up')
   async delete(@Param('id') id: string): Promise<void> {
     const userId = parseInt(id, 10);
     try {
