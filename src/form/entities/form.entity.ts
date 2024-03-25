@@ -10,9 +10,6 @@ export class Form {
   id: number;
 
   @Column()
-  date: Date;
-
-  @Column()
   MerchantID: string;
 
   @Column()

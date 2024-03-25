@@ -14,7 +14,7 @@ import { Form } from 'src/form/entities/form.entity';
           username: 'postgres',
           entities: [User,Form],
           database: 'SignUp_DB',
-          synchronize: false,
+          synchronize: true,
         }),
         TypeOrmModule.forFeature([User,Form]),
       ],
